@@ -16,26 +16,51 @@ import { useEffect, useState } from "react";
 import { BigCircleButton } from "./components/BigCirclebtn";
 import { SmallButton } from "./components/SmallBtn";
 import EmojiPicker from "./components/EmojiPicker";
+import EmojiSticker from "./components/EmojiSticker";
 export default function App() {
   const [selectedImage, setImage] = useState(Image1);
   const [showOptions, setShowOptions] = useState(false);
   const [modalVisible, setModalVisible] = useState(true);
-  useEffect(() => {
-    console.log("🚀 ~ useEffect ~ image:", selectedImage);
-  }, [selectedImage]);
+  useEffect(() => {}, [selectedImage]);
   const [emojis] = useState([
     require("./assets/emojies/100-3.png"),
     require("./assets/emojies/clap2.png"),
+    require("./assets/emojies/clap2.png"),
     require("./assets/emojies/fire.webp"),
+    require("./assets/emojies/fire.webp"),
+    require("./assets/emojies/smile3.png"),
+    require("./assets/emojies/smile3.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/love.png"),
     require("./assets/emojies/love.png"),
     require("./assets/emojies/smile3.png"),
   ]);
+  const [pickedEmoji, setPickedEmoji] = useState(null);
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <ImageViewer imageSrc={selectedImage} />
       </View>
       <View style={styles.footerContainer}>
+      <EmojiSticker imageSize={36} stickerSource={pickedEmoji} key={"()"} />
         {!showOptions ? (
           <>
             <Button>Click here</Button>
@@ -65,19 +90,27 @@ export default function App() {
             </View>
           </>
         )}
+
         <EmojiPicker setModalVisible={setModalVisible} visible={modalVisible}>
           <FlatList
             horizontal
-            showsHorizontalScrollIndicator={Platform.OS == "web"}
+            showsHorizontalScrollIndicator={Platform.OS === "web"}
             data={emojis}
             contentContainerStyle={styles.emojiListcontainer}
             renderItem={({ item, index }) => {
-              <Pressable>
-                <Image source={item} key={index} style={styles.emoji} />
-              </Pressable>;
+              return (
+                <Pressable
+                  key={index}
+                  onPress={() => {
+                    setModalVisible(false);
+                    setPickedEmoji(item);
+                  }}
+                >
+                  <Image source={item} style={styles.emoji} />
+                </Pressable>
+              );
             }}
           />
-          {/* <Text>lasdkfjlkasdjflkasdfjlkasdjflkasjdfl</Text> */}
         </EmojiPicker>
       </View>
       <StatusBar style="auto" />
@@ -127,10 +160,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    // backgroundColor: "red",
+    height: 200,
+    // width: "100%",
     gap: 20,
   },
   emoji: {
-    width: 100,
-    height: 100,
+    width: 60,
+    height: 60,
+    objectFit: "contain",
   },
 });

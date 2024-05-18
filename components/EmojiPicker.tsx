@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   topTitleBar: {
     width: "100%",
-    height: "15%",
+    height: "18%",
     borderTopRightRadius: 18,
     borderTopLeftRadius: 18,
     display: "flex",
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     paddingTop: 2,
-    justifyContent: "flex-start",
+    
   },
 });
