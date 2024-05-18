@@ -8,8 +8,7 @@ import { useEffect, useState } from "react";
 export default function App() {
   const [selectedImage, setImage] = useState(Image1);
   useEffect(() => {
-    
-    console.log("🚀 ~ useEffect ~ image:", selectedImage)
+    console.log("🚀 ~ useEffect ~ image:", selectedImage);
   }, [selectedImage]);
   return (
     <View style={styles.container}>
@@ -29,6 +28,7 @@ export default function App() {
           </View>
           Choose a Picture
         </Button>
+        <Button pressEvent={"modal"}>Open modal</Button>
       </View>
       <StatusBar style="auto" />
     </View>
