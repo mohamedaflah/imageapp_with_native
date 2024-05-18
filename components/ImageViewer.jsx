@@ -14,7 +14,7 @@ export default ImageViewer = ({ imageSrc }) => {
       .catch((err) => {
         alert(err.message);
       });
-  }, []);
+  }, [imageSrc]);
   return (
     <Image
       source={typeof imageSrc === "string" ? { uri: imageSrc } : imageSrc}

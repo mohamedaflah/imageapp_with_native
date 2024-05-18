@@ -1,10 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-export default function Button({ children, pressEvent, setImage }) {
+export default function Button({ children, pressEvent, setImage, setShowOptions }) {
   const handleButtonPress = () => {
     alert("Your Pressed in Button");
   };
-  
 
   const handleImagePick = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -16,15 +15,10 @@ export default function Button({ children, pressEvent, setImage }) {
       setImage(result.assets[0].uri);
     } else {
       alert("You didn't select any image");
-      //   console.log(
-      //     URL.createObjectURL(
-      //       result?.assets?.[0] as unknown as Blob | MediaSource
-      //     )
-      //   );
     }
   };
   const handleModal = () => {
-    alert("MODAL");
+    setShowOptions(true);
   };
   return (
     <View style={styles.container}>
