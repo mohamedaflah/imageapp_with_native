@@ -1,6 +1,11 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-export default function Button({ children, pressEvent, setImage, setShowOptions }) {
+export default function Button({
+  children,
+  pressEvent,
+  setImage,
+  setShowOptions,
+}) {
   const handleButtonPress = () => {
     alert("Your Pressed in Button");
   };

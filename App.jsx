@@ -1,5 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import Image1 from "./assets/images/img1.jpg";
 import ImageViewer from "./components/ImageViewer";
@@ -7,12 +15,21 @@ import Button from "./components/Button";
 import { useEffect, useState } from "react";
 import { BigCircleButton } from "./components/BigCirclebtn";
 import { SmallButton } from "./components/SmallBtn";
+import EmojiPicker from "./components/EmojiPicker";
 export default function App() {
   const [selectedImage, setImage] = useState(Image1);
   const [showOptions, setShowOptions] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   useEffect(() => {
     console.log("🚀 ~ useEffect ~ image:", selectedImage);
   }, [selectedImage]);
+  const [emojis] = useState([
+    require("./assets/emojies/100-3.png"),
+    require("./assets/emojies/clap2.png"),
+    require("./assets/emojies/fire.webp"),
+    require("./assets/emojies/love.png"),
+    require("./assets/emojies/smile3.png"),
+  ]);
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -43,11 +60,25 @@ export default function App() {
               <SmallButton type="refresh" setOptions={setShowOptions}>
                 reset
               </SmallButton>
-              <BigCircleButton />
+              <BigCircleButton setModalVisibility={setModalVisible} />
               <SmallButton type="save">save</SmallButton>
             </View>
           </>
         )}
+        <EmojiPicker setModalVisible={setModalVisible} visible={modalVisible}>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={Platform.OS == "web"}
+            data={emojis}
+            contentContainerStyle={styles.emojiListcontainer}
+            renderItem={({ item, index }) => {
+              <Pressable>
+                <Image source={item} key={index} style={styles.emoji} />
+              </Pressable>;
+            }}
+          />
+          {/* <Text>lasdkfjlkasdjflkasdfjlkasdjflkasjdfl</Text> */}
+        </EmojiPicker>
       </View>
       <StatusBar style="auto" />
     </View>
@@ -75,8 +106,8 @@ const styles = StyleSheet.create({
   footerContainer: {
     flex: 1,
     flexDirection: "column",
-    
-    justifyContent:"flex-end",
+
+    justifyContent: "flex-end",
     marginTop: 150,
     display: "flex",
     paddingBottom: 50,
@@ -88,5 +119,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     justifyContent: "space-between",
+  },
+  emojiListcontainer: {
+    borderTopRightRadius: 16,
+    borderTopLeftRadius: 16,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 20,
+  },
+  emoji: {
+    width: 100,
+    height: 100,
   },
 });

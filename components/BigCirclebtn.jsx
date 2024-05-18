@@ -1,9 +1,12 @@
 import { Pressable, StyleSheet, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-export function BigCircleButton() {
+export function BigCircleButton({ setModalVisibility }) {
   return (
     <View style={styles.circleButtonContainer}>
-      <Pressable style={styles.circleButton}>
+      <Pressable
+        style={styles.circleButton}
+        onPress={() => setModalVisibility(true)}
+      >
         <MaterialIcons name="add" size={35} color={"#25292e"} />
       </Pressable>
     </View>
