@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import { Image, StyleSheet } from "react-native";
 
 export default ImageViewer = ({ imageSrc }) => {
-  return <Image source={typeof imageSrc === "string" ? { uri: imageSrc } : imageSrc} style={styles.image} />;
+
+  return (
+    <Image
+      source={typeof imageSrc === "string" ? { uri: imageSrc } : imageSrc}
+      style={styles.image}
+    />
+  );
 };
 
 const styles = StyleSheet.create({
