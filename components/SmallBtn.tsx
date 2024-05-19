@@ -6,19 +6,18 @@ interface ChildProp {
   children: ReactNode;
   type: "refresh" | "save";
   setOptions: React.Dispatch<SetStateAction<boolean>>;
+  saveImage: () => Promise<void>;
 }
-export function SmallButton({ children, type, setOptions }: ChildProp) {
+export function SmallButton({ children, type, setOptions,saveImage }: ChildProp) {
   const handleReset = () => {
     setOptions(false);
   };
-  const handleSave = () => {
-    alert("Save");
-  };
+
   return (
     <View style={styles.smallButtonContainer}>
       <Pressable
         style={styles.smallButton}
-        onPress={type == "refresh" ? handleReset : handleSave}
+        onPress={type == "refresh" ? handleReset : saveImage}
       >
         <MaterialIcons name={type} size={28} color={"white"} />
         <Text style={{ color: "white", fontSize: 16 }}>{children}</Text>

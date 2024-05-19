@@ -5,18 +5,20 @@ import {
   Platform,
   Pressable,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { captureRef } from "react-native-view-shot";
 import Image1 from "./assets/images/img1.jpg";
 import ImageViewer from "./components/ImageViewer";
 import Button from "./components/Button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BigCircleButton } from "./components/BigCirclebtn";
 import { SmallButton } from "./components/SmallBtn";
 import EmojiPicker from "./components/EmojiPicker";
 import EmojiSticker from "./components/EmojiSticker";
+import * as MediaLibrary from "expo-media-library";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function App() {
   const [selectedImage, setImage] = useState(Image1);
   const [showOptions, setShowOptions] = useState(false);
@@ -54,13 +56,47 @@ export default function App() {
     require("./assets/emojies/smile3.png"),
   ]);
   const [pickedEmoji, setPickedEmoji] = useState(null);
+
+  const [status, requestPermision] = MediaLibrary.usePermissions();
+  if (status == null) {
+    requestPermision();
+  }
+  const imageRef = useRef(null);
+
+  const handleScreenshotSave = async () => {
+    try {
+      const localUri = await captureRef(imageRef, {
+        height: 400,
+        quality: 1,
+      });
+      await MediaLibrary.saveToLibraryAsync(localUri);
+      if (localUri) {
+        alert("Image Saved in your local");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+  const [containerPropery, setContainerPropery] = useState(null);
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
+    <GestureHandlerRootView style={styles.container}>
+      <View
+        style={styles.imageContainer}
+        ref={imageRef}
+        onLayout={(event) => {
+          const { width, height } = event.nativeEvent.layout;
+          setContainerPropery({ width, height });
+        }}
+      >
         <ImageViewer imageSrc={selectedImage} />
+        <EmojiSticker
+          containerProperty={containerPropery}
+          imageSize={36}
+          stickerSource={pickedEmoji}
+          key={"()"}
+        />
       </View>
       <View style={styles.footerContainer}>
-      <EmojiSticker imageSize={36} stickerSource={pickedEmoji} key={"()"} />
         {!showOptions ? (
           <>
             <Button>Click here</Button>
@@ -86,7 +122,9 @@ export default function App() {
                 reset
               </SmallButton>
               <BigCircleButton setModalVisibility={setModalVisible} />
-              <SmallButton type="save">save</SmallButton>
+              <SmallButton type="save" saveImage={handleScreenshotSave}>
+                save
+              </SmallButton>
             </View>
           </>
         )}
@@ -114,7 +152,7 @@ export default function App() {
         </EmojiPicker>
       </View>
       <StatusBar style="auto" />
-    </View>
+    </GestureHandlerRootView>
   );
 }
 
@@ -129,7 +167,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    paddingTop: 50,
+    marginTop: 50,
+    position: "relative",
   },
   image: {
     width: 320,
