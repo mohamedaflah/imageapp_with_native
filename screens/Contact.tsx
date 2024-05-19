@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, TextInput, View } from "react-native";
+import { Alert, Text, TextInput, View } from "react-native";
 
 export default function Contact() {
   return (
@@ -31,6 +31,8 @@ export default function Contact() {
         <TextInput
           placeholder="Email address"
           keyboardType="email-address"
+          style={{ width: "100%" }}
+          //   onChangeText={(e)=>Alert.alert(e)}
         ></TextInput>
       </View>
     </View>

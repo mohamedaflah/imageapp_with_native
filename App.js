@@ -42,9 +42,11 @@ export default function App() {
               tabBarInactiveTintColor: "gray",
               headerShown: false,
               tabBarStyle: styles.tabBarStyle,
+              
+              
             })}
           >
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen name="Home" component={Home}  />
             <Tab.Screen
               name="About"
               component={About}
