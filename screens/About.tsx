@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 
 export default function About() {
   return (
+    // <SafeAreaProvider>
     <View
       style={{
         width: "100%",
@@ -16,5 +17,6 @@ export default function About() {
       <StatusBar style="dark" />
       <Text>About page</Text>
     </View>
+    // </SafeAreaProvider>
   );
 }

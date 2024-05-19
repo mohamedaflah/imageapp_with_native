@@ -3,7 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./screens/Home";
 import About from "./screens/About";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
@@ -29,6 +30,6 @@ export default function App() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    // backgroundColor: "#000", // Ensure background color matches your app theme
+    backgroundColor: "#25292e",
   },
 });
