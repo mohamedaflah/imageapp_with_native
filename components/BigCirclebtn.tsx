@@ -1,6 +1,11 @@
 import { Pressable, StyleSheet, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-export function BigCircleButton({ setModalVisibility }) {
+import { SetStateAction } from "react";
+
+interface ChildProp {
+  setModalVisibility: React.Dispatch<SetStateAction<boolean>>;
+}
+export function BigCircleButton({ setModalVisibility }: ChildProp) {
   return (
     <View style={styles.circleButtonContainer}>
       <Pressable

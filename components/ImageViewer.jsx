@@ -12,7 +12,7 @@ export default ImageViewer = ({ imageSrc }) => {
         console.log(response.request.responseURL, " () data");
       })
       .catch((err) => {
-        alert(err.message);
+        console.log(err.message);
       });
   }, [imageSrc]);
   return (
