@@ -20,7 +20,7 @@ import EmojiSticker from "./components/EmojiSticker";
 export default function App() {
   const [selectedImage, setImage] = useState(Image1);
   const [showOptions, setShowOptions] = useState(false);
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   useEffect(() => {}, [selectedImage]);
   const [emojis] = useState([
     require("./assets/emojies/100-3.png"),
