@@ -9,7 +9,6 @@ export default function Button({
 }) {
   const { navigate } = useNavigation();
   const handleButtonPress = () => {
-    // alert("Your Pressed in Button");
     navigate("About" as never);
   };
 

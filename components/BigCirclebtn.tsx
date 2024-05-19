@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import {  StyleSheet, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SetStateAction } from "react";
 
@@ -8,12 +8,12 @@ interface ChildProp {
 export function BigCircleButton({ setModalVisibility }: ChildProp) {
   return (
     <View style={styles.circleButtonContainer}>
-      <Pressable
+      <TouchableOpacity
         style={styles.circleButton}
         onPress={() => setModalVisibility(true)}
       >
         <MaterialIcons name="add" size={35} color={"#25292e"} />
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }
