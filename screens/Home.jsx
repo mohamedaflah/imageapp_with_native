@@ -53,6 +53,7 @@ export default function Home() {
   const [containerPropery, setContainerPropery] = useState(null);
   return (
     <GestureHandlerRootView style={styles.container}>
+      <StatusBar style="inverted" />
       <View
         style={styles.imageContainer}
         ref={imageRef}
@@ -128,7 +129,6 @@ export default function Home() {
           />
         </EmojiPicker>
       </View>
-      
     </GestureHandlerRootView>
   );
 }
