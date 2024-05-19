@@ -9,8 +9,7 @@ export default function EmojiSticker({
   stickerSource,
   containerProperty,
 }) {
-  containerProperty.width;
-  containerProperty.height;
+  
   const scaleImage = useSharedValue(imageSize);
   const doubleTap = Gesture.Tap()
     .numberOfTaps(2)

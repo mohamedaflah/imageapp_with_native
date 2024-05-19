@@ -26,8 +26,9 @@ export default ImageViewer = ({ imageSrc }) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 320,
-    height: 480,
+    width: 380,
+    objectFit:"cover",
+    height: 500,
     borderRadius: 10,
   },
 });

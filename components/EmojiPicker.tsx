@@ -1,6 +1,7 @@
 import { ReactNode, SetStateAction } from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import Animated from "react-native-reanimated";
 interface ChildProp {
   children: ReactNode;
   setModalVisible: React.Dispatch<SetStateAction<boolean>>;
@@ -12,8 +13,8 @@ export default function EmojiPicker({
   visible,
 }: ChildProp) {
   return (
-    <Modal animationType="slide" transparent={true} visible={visible}>
-      <View style={styles.modalContainer}>
+    <Modal  animationType="slide"  transparent={true}   visible={visible}>
+      <Animated.View style={styles.modalContainer}>
         <View style={styles.topTitleBar}>
           <Text style={styles.titleText}>Choose a Sticker</Text>
           <Pressable onPress={() => setModalVisible(false)}>
@@ -21,14 +22,14 @@ export default function EmojiPicker({
           </Pressable>
         </View>
         <View style={styles.emojiContainer}>{children}</View>
-      </View>
+      </Animated.View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   modalContainer: {
-    height: "28%",
+    height: "26%",
     width: "100%",
     backgroundColor: "#25292e",
     borderTopRightRadius: 18,

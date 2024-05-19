@@ -62,9 +62,11 @@ export default function App() {
     requestPermision();
   }
   const imageRef = useRef(null);
+  const [saveLoading, setSaveLoading] = useState(false);
 
   const handleScreenshotSave = async () => {
     try {
+      setSaveLoading(true);
       const localUri = await captureRef(imageRef, {
         height: 400,
         quality: 1,
@@ -73,6 +75,7 @@ export default function App() {
       if (localUri) {
         alert("Image Saved in your local");
       }
+      setSaveLoading(false);
     } catch (error) {
       alert(error);
     }
@@ -122,7 +125,11 @@ export default function App() {
                 reset
               </SmallButton>
               <BigCircleButton setModalVisibility={setModalVisible} />
-              <SmallButton type="save" saveImage={handleScreenshotSave}>
+              <SmallButton
+                type={`${saveLoading ? "sync" : "save"}`}
+                saveImage={handleScreenshotSave}
+                saveLoading={saveLoading}
+              >
                 save
               </SmallButton>
             </View>
@@ -151,7 +158,7 @@ export default function App() {
           />
         </EmojiPicker>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar style="inverted" />
     </GestureHandlerRootView>
   );
 }
@@ -169,11 +176,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 50,
     position: "relative",
-  },
-  image: {
-    width: 320,
-    height: 400,
-    borderRadius: 10,
+    height:550
   },
   footerContainer: {
     flex: 1,
