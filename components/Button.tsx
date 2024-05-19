@@ -1,13 +1,16 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/native";
 export default function Button({
   children,
   pressEvent,
   setImage,
   setShowOptions,
 }) {
+  const { navigate } = useNavigation();
   const handleButtonPress = () => {
     alert("Your Pressed in Button");
+    navigate("About" as never);
   };
 
   const handleImagePick = async () => {
